@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import lucas.webscraperproj.domain.Anuncio;
+import lucas.webscraperproj.domain.EntidadeDominio;
 import lucas.webscraperproj.domain.Quarto;
 import lucas.webscraperproj.util.StringToDouble;
 import lucas.webscraperproj.util.TextElement;
@@ -41,16 +42,17 @@ public class WebScraper extends AbstractWebScraper{
 		driver.findElement(By.xpath("//*[@data-placeholder='Data de check-out']")).click(); 	
 		driver.findElement(By.xpath("(//*[@data-id='"+dataCheckout+"'])[2]")).click();		
 		driver.findElement(By.xpath("//*[text()='Pesquisar']")).click();
+		
 	
 	}
 	
-	public void buscarAnuncios()
+	public List<EntidadeDominio> buscarAnuncios()
 	{
 		
-		List<Anuncio> anuncios = new ArrayList<Anuncio>();
+		List<EntidadeDominio> anuncios = new ArrayList<EntidadeDominio>();
 		List<String> links = buscarEnderecos(new ArrayList<WebElement>(), driver);
 
-		for(int i = 0; i <links.size(); i++)
+		for(int i = 0; i < 1 ; i++)
 		{
 			driver.navigate().to(links.get(i));
 			Anuncio a = new Anuncio();
@@ -66,6 +68,8 @@ public class WebScraper extends AbstractWebScraper{
 			
 			anuncios.add(a);
 		}
+		driver.close();
+		return anuncios;
 	}
 	
 	

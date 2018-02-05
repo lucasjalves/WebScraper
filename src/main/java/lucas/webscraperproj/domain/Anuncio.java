@@ -3,7 +3,7 @@ package lucas.webscraperproj.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Anuncio {
+public class Anuncio extends EntidadeDominio{
 	private String nome;
 	private Integer qtdeAvaliacoes;
 	private String nota;

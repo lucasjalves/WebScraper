@@ -20,7 +20,7 @@ public class App
         
       w.abrirNavegador("https://www.booking.com");
       w.filtrosPesquisa("São Paulo", Datas.dtAtual(), Datas.somarSemanas(1));
-      w.test();
+      w.buscarAnuncios();
 
     	
     }

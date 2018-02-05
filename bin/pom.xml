@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>lucas</groupId>
+  <artifactId>webscraperproj</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>webscraper</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  					
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+	<!-- selenium-java -->
+	<dependency>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-java</artifactId>
+	    <version>3.8.1</version>
+	</dependency>
+ 
+	 <!-- selenium-server -->
+	<dependency>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-server</artifactId>
+	    <version>3.8.1</version>
+	</dependency>
+  </dependencies>
+	  <build>
+	    <plugins>
+	        <plugin>
+	            <groupId>com.lazerycode.selenium</groupId>
+	            <artifactId>driver-binary-downloader-maven-plugin</artifactId>
+	            <version>1.0.0</version>
+	            <configuration>
+	                <!-- root directory that downloaded driver binaries will be stored in -->
+	                <rootStandaloneServerDirectory>C:/selenium/</rootStandaloneServerDirectory>
+	                <!-- Where you want to store downloaded zip files -->
+	                <downloadedZipFileDirectory>C:/selenium/</downloadedZipFileDirectory>
+	            </configuration>
+	        </plugin>
+	    </plugins>  
+	    </build>
+</project>

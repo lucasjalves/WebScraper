@@ -1,12 +1,27 @@
-package lucas.web.scraperproj.domain;
+package lucas.webscraperproj.domain;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Anuncio {
 	private String nome;
 	private Integer qtdeAvaliacoes;
 	private String nota;
 	private String endereco;
+	private List<Quarto> quartos;
 	
 	
+	public Anuncio()
+	{
+		this.quartos = new ArrayList<Quarto>();
+	}
+	
+	public List<Quarto> getQuartos() {
+		return quartos;
+	}
+	public void setQuartos(List<Quarto> quartos) {
+		this.quartos = quartos;
+	}
 	public String getNome() {
 		return nome;
 	}

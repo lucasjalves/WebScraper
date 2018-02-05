@@ -8,12 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import lucas.web.scraperproj.domain.Anuncio;
+import lucas.webscraperproj.domain.Anuncio;
+import lucas.webscraperproj.domain.Quarto;
+import lucas.webscraperproj.util.StringToDouble;
+import lucas.webscraperproj.util.TextElement;
 
 public class WebScraper extends AbstractWebScraper{
 	private WebDriver driver;
-	private List<Anuncio> anuncios;
-	private List<WebElement> elements;
 	
 	public WebScraper()
 	{
@@ -45,50 +46,48 @@ public class WebScraper extends AbstractWebScraper{
 	
 	public void buscarAnuncios()
 	{
-		elements = new ArrayList<WebElement>();
-
-		elements = new ArrayList<WebElement>();
-		elements = driver.findElements(By.xpath("//*[@class='sr-hotel__name\n']"));
-		anuncios = new ArrayList<Anuncio>();
 		
-		for(int i = 0; i < elements.size(); i++)
-		{
-			int j = i + 1;
-			String nota = driver.findElement(By.xpath("(//*[@class='review-score-badge'])["+ j +"]")).getText();
-			Anuncio anuncio = new Anuncio();
-			anuncio.setNota(nota);
-			anuncio.setNome(elements.get(i).getText());
-			System.out.println(anuncio.getNome() + " Nota: " + anuncio.getNota());
-			anuncios.add(anuncio);		
-		}
-		
-	}
-	
-	public void test()
-	{
-		elements = new ArrayList<WebElement>();
+		List<Anuncio> anuncios = new ArrayList<Anuncio>();
+		List<String> links = buscarEnderecos(new ArrayList<WebElement>(), driver);
 
-		elements = new ArrayList<WebElement>();
-		elements = driver.findElements(By.xpath("//*[@class='hotel_name_link url']"));
-		List<String> links = new ArrayList<String>();
-		//List<Anuncio> anuncios = new ArrayList<Anuncio>();
-		for(int i = 0; i < elements.size(); i++)
-			links.add(elements.get(i).getAttribute("href"));
-			
-		for(int i =0; i <links.size(); i++)
+		for(int i = 0; i <links.size(); i++)
 		{
 			driver.navigate().to(links.get(i));
+			Anuncio a = new Anuncio();
+			a.setNome(TextElement.getText(driver, "//*[@class='hp__hotel-name']"));
+			a.setEndereco(TextElement.getText(driver, "//*[@class='\nhp_address_subtitle\njs-hp_address_subtitle\njq_tooltip\n']"));
 			
-			String nome = driver.findElement(By.xpath("//*[@class='hp__hotel-name']")).getText();
-			String endereco = driver.findElement(By.xpath("//*[@class='\nhp_address_subtitle\njs-hp_address_subtitle\njq_tooltip\n']")).getText();
+			List<WebElement> nome = driver.findElements(By.xpath("//*[@class='hprt-roomtype-icon-link']"));		
+			List<WebElement> preco = driver.findElements(By.xpath("//*[@class='hprt-price-price ']"));
 			
-			//Anuncio a = new Anuncio();
-			//a.setNome(nome);
-			//a.setEndereco(endereco);
-			System.out.println(nome);
-			System.out.println(endereco);
+			
+			for(int j = 0; j < preco.size(); j++)
+				a.getQuartos().add(encontrarQuarto(nome.get(j), preco.get(j)));
+			
+			anuncios.add(a);
 		}
-			
+	}
+	
+	
+	public List<String> buscarEnderecos(List<WebElement> e, WebDriver driver)
+	{
+		List<String> links = new ArrayList<String>();
+		e = driver.findElements(By.xpath("//*[@class='hotel_name_link url']"));
+		
+		for(int i = 0; i < e.size(); i++)
+			links.add(e.get(i).getAttribute("href"));
+		
+		return links;	
+	}
+	
+	
+	public Quarto encontrarQuarto(WebElement nome, WebElement preco)
+	{
+		Quarto q = new Quarto();
+		q.setNome(nome.getText());
+		q.setPreco(StringToDouble.converter(preco.getText()));
+		
+		return q;
 		
 	}
 

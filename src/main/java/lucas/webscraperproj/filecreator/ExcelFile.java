@@ -16,22 +16,35 @@ public class ExcelFile {
 	
 	public static void criarArquivo(List<EntidadeDominio> e, String nome, String nomePlanilha) throws IOException
 	{
-		int lastRow = 1;
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		HSSFSheet sheet = workbook.createSheet(nomePlanilha);
+		HSSFRow headRow = sheet.createRow(0);
+		headRow.createCell(0).setCellValue("Nome");
+		headRow.createCell(1).setCellValue("Endereco");
+		headRow.createCell(2).setCellValue("Quarto");
+		headRow.createCell(3).setCellValue("Valor");
 		
-		HSSFRow rowhead = sheet.createRow(0);
-        rowhead.createCell(0).setCellValue("Nome");
-        rowhead.createCell(1).setCellValue("Endereço");
-        rowhead.createCell(2).setCellValue("Quartos");
+		
+        int i = 1;
+        for(EntidadeDominio en: e)
+        {
+        	Anuncio a = (Anuncio) en;
+        	
+        	HSSFRow row = sheet.createRow(i++);
+        	row.createCell(0).setCellValue(a.getNome());
+        	row.createCell(1).setCellValue(a.getEndereco());
+        	row.createCell(2).setCellValue(a.getQuartos().get(0).getNome());
+        	row.createCell(3).setCellValue(a.getQuartos().get(0).getPreco());
+        }
+        /*
         for(int i = 0; i < e.size(); i++)
         {
         	Anuncio a = (Anuncio) e.get(i);
-            HSSFRow row = sheet.createRow(i + 1);
-        
+        	row = sheet.createRow(1 + i);
+
             row.createCell(0).setCellValue(a.getNome());
             row.createCell(1).setCellValue(a.getEndereco());     
-            
+           
             for(int j = 0; j < a.getQuartos().size(); j++)
             {
             	Quarto q = a.getQuartos().get(j);
@@ -40,9 +53,10 @@ public class ExcelFile {
             	lastRow = j;
             }
         }
-        
+        */
         FileOutputStream fileOut = new FileOutputStream(nome);
         workbook.write(fileOut);
+        workbook.close();
         fileOut.close();
 	}
 }

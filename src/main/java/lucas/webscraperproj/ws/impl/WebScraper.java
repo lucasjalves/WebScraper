@@ -52,7 +52,7 @@ public class WebScraper extends AbstractWebScraper{
 		List<EntidadeDominio> anuncios = new ArrayList<EntidadeDominio>();
 		List<String> links = buscarEnderecos(new ArrayList<WebElement>(), driver);
 
-		for(int i = 0; i < 1 ; i++)
+		for(int i = 0; i < links.size() ; i++)
 		{
 			driver.navigate().to(links.get(i));
 			Anuncio a = new Anuncio();
@@ -63,7 +63,7 @@ public class WebScraper extends AbstractWebScraper{
 			List<WebElement> preco = driver.findElements(By.xpath("//*[@class='hprt-price-price ']"));
 			
 			
-			for(int j = 0; j < preco.size(); j++)
+			for(int j = 0; j < 1; j++)
 				a.getQuartos().add(encontrarQuarto(nome.get(j), preco.get(j)));
 			
 			anuncios.add(a);

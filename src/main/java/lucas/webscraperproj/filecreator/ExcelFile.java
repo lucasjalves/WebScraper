@@ -10,7 +10,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import lucas.webscraperproj.domain.Anuncio;
 import lucas.webscraperproj.domain.EntidadeDominio;
-import lucas.webscraperproj.domain.Quarto;
 
 public class ExcelFile {
 	
@@ -23,7 +22,8 @@ public class ExcelFile {
 		headRow.createCell(1).setCellValue("Endereco");
 		headRow.createCell(2).setCellValue("Quarto");
 		headRow.createCell(3).setCellValue("Valor");
-		
+		headRow.createCell(4).setCellValue("Nota");
+		headRow.createCell(5).setCellValue("Qtde Pessoas");
 		
         int i = 1;
         for(EntidadeDominio en: e)
@@ -35,25 +35,10 @@ public class ExcelFile {
         	row.createCell(1).setCellValue(a.getEndereco());
         	row.createCell(2).setCellValue(a.getQuartos().get(0).getNome());
         	row.createCell(3).setCellValue(a.getQuartos().get(0).getPreco());
+        	row.createCell(4).setCellValue(a.getQuartos().get(0).getNota());
+        	row.createCell(5).setCellValue("sadn");
+        	
         }
-        /*
-        for(int i = 0; i < e.size(); i++)
-        {
-        	Anuncio a = (Anuncio) e.get(i);
-        	row = sheet.createRow(1 + i);
-
-            row.createCell(0).setCellValue(a.getNome());
-            row.createCell(1).setCellValue(a.getEndereco());     
-           
-            for(int j = 0; j < a.getQuartos().size(); j++)
-            {
-            	Quarto q = a.getQuartos().get(j);
-            	HSSFRow rowQuartos = sheet.createRow(lastRow + 1);
-            	rowQuartos.createCell(2).setCellValue(q.getNome());
-            	lastRow = j;
-            }
-        }
-        */
         FileOutputStream fileOut = new FileOutputStream(nome);
         workbook.write(fileOut);
         workbook.close();

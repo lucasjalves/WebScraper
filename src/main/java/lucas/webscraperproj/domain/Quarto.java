@@ -2,19 +2,26 @@ package lucas.webscraperproj.domain;
 
 public class Quarto {
 	private String nome;
-	private int qtdePessoas;
+	private String qtdePessoas;
 	private double preco;
+	private String nota;
 	
+	public String getNota() {
+		return nota;
+	}
+	public void setNota(String nota) {
+		this.nota = nota;
+	}
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getQtdePessoas() {
+	public String getQtdePessoas() {
 		return qtdePessoas;
 	}
-	public void setQtdePessoas(int qtdePessoas) {
+	public void setQtdePessoas(String qtdePessoas) {
 		this.qtdePessoas = qtdePessoas;
 	}
 	public double getPreco() {

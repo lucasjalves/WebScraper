@@ -8,6 +8,8 @@ public class Anuncio extends EntidadeDominio{
 	private Integer qtdeAvaliacoes;
 	private String nota;
 	private String endereco;
+	private String estrelas;
+
 	private List<Quarto> quartos;
 	
 	
@@ -45,6 +47,12 @@ public class Anuncio extends EntidadeDominio{
 	}
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+	public String getEstrelas() {
+		return estrelas;
+	}
+	public void setEstrelas(String estrelas) {
+		this.estrelas = estrelas;
 	}
 	
 }

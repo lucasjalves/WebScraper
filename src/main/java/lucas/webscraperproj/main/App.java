@@ -25,8 +25,8 @@ public class App
     	WebScraper w = new WebScraper();
     	w.setDriver(new ChromeDriver()); 
     	w.abrirNavegador("https://www.booking.com");
-    	w.filtrosPesquisa("São Paulo", Datas.dtAtual(), Datas.somarSemanas(1));
-    	ExcelFile.criarArquivo(w.buscarAnuncios(), "C:\\Users\\lucasjulio\\Desktop\\teste.xls", "teste");
+    	w.filtrosPesquisa("São Paulo", Datas.dtAtual(), Datas.somarSemanas(2));
+    	ExcelFile.criarArquivo(w.buscarAnuncios(), "C:\\Users\\Lucas\\Desktop\\teste.xls", "teste");
 
       
     }

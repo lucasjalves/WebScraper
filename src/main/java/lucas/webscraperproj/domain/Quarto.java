@@ -3,7 +3,7 @@ package lucas.webscraperproj.domain;
 public class Quarto {
 	private String nome;
 	private String qtdePessoas;
-	private double preco;
+	private Double preco;
 	private String nota;
 	
 	public String getNota() {
@@ -24,10 +24,10 @@ public class Quarto {
 	public void setQtdePessoas(String qtdePessoas) {
 		this.qtdePessoas = qtdePessoas;
 	}
-	public double getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
-	public void setPreco(double preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 	

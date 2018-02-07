@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 public class Datas {
+	public static int QTDE_DIAS;
 	public static String dtAtual()
 	{
 		String dtEmLong;
@@ -23,7 +24,7 @@ public class Datas {
 	
 	public static String somarSemanas(int semanas)
 	{
-		
+		QTDE_DIAS = semanas * 7;
 		String dtEmLong;
     	LocalDate d = LocalDate.now().plusWeeks(semanas);
     	
